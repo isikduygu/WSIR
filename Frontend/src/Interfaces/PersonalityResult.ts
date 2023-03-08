@@ -1,6 +1,10 @@
 export interface PersonalityResult {
-    name: string;
-    percentages: number[];
-    personalityType: string;
+  extraversion: number;
+  agreeableness: number;
+  conscientiousness: number;
+  neuroticism: number;
+  openness: number;
   }
-  
+      // name: string;
+    // percentages: number[];
+    // personalityType: string;

@@ -14,18 +14,22 @@ export class PersonalityService {
 
   constructor(private readonly http: HttpClient) { }
 
-  sendResults(names: string[], personalityTest: string[]): Observable<PersonalityResult[]> {
-    const body = { names, personalityTest };
-    return this.http.post<PersonalityResult[]>(`${this.baseUrl}/personalityTest`, body)
+  sendResults(answers: number[]): Observable<PersonalityResult> {
+    const body = { answers };
+    return this.http.post(`${this.baseUrl}/calculate_big_five_scores`, body)
       .pipe(
-        map((results: PersonalityResult[]) => {
-          // map the response to the interface
-          return results.map(result => ({
-            name: result.name,
-            percentages: result.percentages,
-            personalityType: result.personalityType
-          }));
+        map((result: any) => {
+          // Create a PersonalityResult object manually
+          const personalityResult: PersonalityResult = {
+            extraversion: result.extraversion,
+            agreeableness: result.agreeableness,
+            conscientiousness: result.conscientiousness,
+            neuroticism: result.neuroticism,
+            openness: result.openness,
+          };
+          return personalityResult;
         })
       );
   }
+  
 }

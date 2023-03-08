@@ -30,7 +30,7 @@
 			margin-bottom: 1em;
 		}
 		label {
-			display: block;
+			display: inline;
 			margin-bottom: 0.5em;
 		}
 		input[type="radio"] {
@@ -69,20 +69,23 @@
 	<h1>Quiz Template</h1>
 	<form (submit)="onSubmit()">
 		<div *ngFor="let question of questions">
-      <fieldset>
-        <legend>{{question.text}}</legend>
-        <label><input type="radio" [name]="question.id" value="a">{{question.choices[0].a}}</label>
-        <label><input type="radio"  [name]="question.id" value="b"> {{question.choices[1].b}}</label>
-        <label><input type="radio"  [name]="question.id" value="-">-</label>
-      </fieldset>
+			<fieldset>
+				<legend>{{question.question}}</legend>
+				<label><input type="radio" [name]="question.id" [(ngModel)]="answers[question.id]" [value]="1">disagree</label>
+				<label><input type="radio" [name]="question.id" [(ngModel)]="answers[question.id]" [value]="2">slightly disagree</label>
+				<label><input type="radio" [name]="question.id" [(ngModel)]="answers[question.id]" [value]="3">neutral</label>
+				<label><input type="radio" [name]="question.id" [(ngModel)]="answers[question.id]" [value]="4">slightly agree</label>
+				<label><input type="radio" [name]="question.id" [(ngModel)]="answers[question.id]" [value]="5">agree </label>
+			  </fieldset>
     </div>
-		<button>Submit</button>
+		<button *ngIf="currentPageNumber >= lastPageNumber">Submit</button>
 	</form>
 
-	<mat-paginator [length]="questions.length"
+	<mat-paginator [length]="50"
 	[pageSize]="questionsPerPage"
-	[pageIndex]="currentPageNumber"
-	(page)="currentPageNumber = $event.pageIndex">
-	</mat-paginator>
+	[pageIndex]="currentPageNumber - 1"
+	(page)="onPageChange($event)">
+</mat-paginator>
+
 </body>
 </html>
