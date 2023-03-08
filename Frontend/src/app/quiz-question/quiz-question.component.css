@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    font-size: 2em;
+    margin: 1em 0;
+    text-align: center;
+}
+form {
+    margin: 0 auto;
+    max-width: 600px;
+    padding: 2em;
+}
+fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+label {
+    display: inline;
+    margin-bottom: 0.5em;
+}
+input[type="radio"] {
+    margin-right: 0.5em;
+}
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 0.5em;
+    margin-top: 1em;
+}
+button:hover {
+    background-color: #3e8e41;
+}
+input[type="radio"] {
+-webkit-appearance: none; /* Remove the default appearance */
+-moz-appearance: none;
+appearance: none;
+border-radius: 50%; /* Make the button circular */
+width: 16px;
+height: 16px;
+border: 2px solid #ccc; /* Set the border color */
+outline: none; /* Remove the outline on focus */
+transition: border-color 0.3s ease-in-out;
+}
+input[type="radio"]:checked {
+background-color: pink; /* Set the border color */
+}

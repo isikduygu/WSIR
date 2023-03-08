@@ -1,0 +1,36 @@
+<h1>Quiz Template</h1>
+<section class="progress-section">
+    <mat-progress-bar mode="determinate" [value]="progressBarValue"></mat-progress-bar>
+    <label>%{{progressBarValue}}</label>
+</section>
+	<form (submit)="onSubmit()">
+		<div *ngFor="let question of questions">
+			<fieldset>
+				<legend>{{question.question}}</legend>
+				<label><input type="radio" [name]="question.id" [(ngModel)]="answers[question.id]" [value]="1">disagree</label>
+				<label><input type="radio" [name]="question.id" [(ngModel)]="answers[question.id]" [value]="2">slightly disagree</label>
+				<label><input type="radio" [name]="question.id" [(ngModel)]="answers[question.id]" [value]="3">neutral</label>
+				<label><input type="radio" [name]="question.id" [(ngModel)]="answers[question.id]" [value]="4">slightly agree</label>
+				<label><input type="radio" [name]="question.id" [(ngModel)]="answers[question.id]" [value]="5">agree </label>
+              <!-- <mat-radio-group aria-label="Select an option" (change)="updateProgressBar()">
+                <mat-radio-button [name]="question.id" [(ngModel)]="answers[question.id]" [value]="1">disagree</mat-radio-button>
+                <mat-radio-button [name]="question.id" [(ngModel)]="answers[question.id]" [value]="2">slightly disagree</mat-radio-button>
+                <mat-radio-button [name]="question.id" [(ngModel)]="answers[question.id]" [value]="3">neutral</mat-radio-button>
+                <mat-radio-button [name]="question.id" [(ngModel)]="answers[question.id]" [value]="4">slightly agree</mat-radio-button>
+                <mat-radio-button [name]="question.id" [(ngModel)]="answers[question.id]" [value]="5">agree</mat-radio-button>
+              </mat-radio-group> -->
+            </fieldset>
+    </div>
+		<button *ngIf="currentPageNumber >= lastPageNumber">Submit</button>
+		<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+	</form>
+
+<mat-paginator #paginator
+               class="demo-paginator"
+               (page)="onPageChange($event)"
+               [length]="length"
+               [pageSize]="questionsPerPage"
+               [showFirstLastButtons]="showFirstLastButtons"
+               [pageIndex]="currentPageNumber - 1"
+               aria-label="Select page">
+</mat-paginator>

@@ -91,8 +91,6 @@ app = Flask(__name__)
 CORS(app)
 
 def calculate_big_five_scores(answers):
-    if None in answers:
-        raise ValueError('Invalid input: answers array contains a None value')
     E = 20 + answers[0] - answers[5] + answers[10] - answers[15] + answers[20] - answers[25] + answers[30] - answers[35] + answers[40] - answers[45]
     A = 14 - answers[1] + answers[6] - answers[11] + answers[16] - answers[21] + answers[26] - answers[31] + answers[36] + answers[41] + answers[46]
     C = 14 + answers[2] - answers[7] + answers[12] - answers[17] + answers[22] - answers[27] + answers[32] - answers[37] + answers[42] + answers[47]
@@ -112,6 +110,8 @@ def get_big_five_scores():
                 'neuroticism': N,
                 'openness': O
         }
+    if None in answers:
+        raise ValueError('Invalid input: answers array contains a None value')
     return jsonify(results)
 
 @app.route('/api/questions')

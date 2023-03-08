@@ -6,9 +6,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { QuizQuestionComponent } from './quiz-question/quiz-question.component';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { NgApexchartsModule } from "ng-apexcharts";
+import { PersonalityResultComponent } from './personality-result/personality-result.component'
+import { AppRoutingModule } from './app-routing.module';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    QuizQuestionComponent,
+    PersonalityResultComponent
   ],
   imports: [
     BrowserModule,
@@ -16,7 +24,11 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     BrowserAnimationsModule,
     MatPaginatorModule,
     HttpClientModule,
-    NgxSpinnerModule
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
+    MatRadioModule,
+    MatProgressBarModule,
+    NgApexchartsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
