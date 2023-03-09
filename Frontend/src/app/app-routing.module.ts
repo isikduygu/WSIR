@@ -4,7 +4,7 @@ import { PersonalityResultComponent } from './personality-result/personality-res
 import { QuizQuestionComponent } from './quiz-question/quiz-question.component';
 
 const routes: Routes = [
-  { path: 'personalityResult', component: PersonalityResultComponent },
+  { path: 'personalityResult/:id', component: PersonalityResultComponent },
   { path: 'test', component: QuizQuestionComponent }
 ];
 

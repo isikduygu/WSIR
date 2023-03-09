@@ -14,8 +14,8 @@ export class PersonalityService {
 
   constructor(private readonly http: HttpClient) { }
 
-  sendResults(answers: number[]): Observable<PersonalityResult> {
-    const body = { answers };
+  sendResults(name: string, answers: number[]): Observable<PersonalityResult> {
+    const body = { name ,answers };
     return this.http.post(`${this.baseUrl}/calculate_big_five_scores`, body)
       .pipe(
         map((result: any) => {
@@ -26,10 +26,15 @@ export class PersonalityService {
             conscientiousness: result.conscientiousness,
             neuroticism: result.neuroticism,
             openness: result.openness,
+            name: result.name,
+            id: result.id
           };
           return personalityResult;
         })
       );
+  }
+  getPersonalityResult(id: string) {
+    return this.http.get<any>(`${this.baseUrl}/personalityResult/${id}`);
   }
   
 }

@@ -4,6 +4,8 @@ export interface PersonalityResult {
   conscientiousness: number;
   neuroticism: number;
   openness: number;
+  name: string;
+  id: string;
   }
       // name: string;
     // percentages: number[];

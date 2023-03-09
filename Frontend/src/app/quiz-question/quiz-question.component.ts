@@ -53,10 +53,12 @@ export class QuizQuestionComponent implements OnInit {
 
     // call the service to get the results
     this.personalityService
-      .sendResults(this.answers.filter((answer) => answer !== undefined))
+      .sendResults(this.name ,this.answers.filter((answer) => answer !== undefined))
       .subscribe((results: PersonalityResult) => {
         console.log(results);
-        this.router.navigate(['personalityResult']);
+        console.log(results.id);
+        console.log(results["id"]);
+        this.router.navigate(['personalityResult', results.id]);
       });
   }
 

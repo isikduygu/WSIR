@@ -1,90 +1,8 @@
-# from flask import Flask, jsonify, request
-# from flask_cors import CORS
-
-# app = Flask(__name__)
-# CORS(app)
-
-# # Helper function to sort answers
-# def sort_answers(answers, char):
-#     my_list = [0, 0, 0, 0]
-#     for i in range(10):
-#         if answers[i*7].upper() == char:
-#             my_list[0] += 1
-#         for j in range(3):
-#             for k in range(1, 3):
-#                 if answers[i*7+j*2+k].upper() == char:
-#                     my_list[j+1] += 1
-#     return my_list
-
-# # Helper function to calculate percentage of B answers
-# def percent_of_B(A_list, B_list):
-#     result = []
-#     for i in range(len(B_list)):
-#         percentage = int(round(float(B_list[i]) / (A_list[i] + B_list[i])*100))
-#         result.append(percentage)
-#     return result
-
-# # Helper function to extract personality type
-# def extract_personality(B_list):
-#     result = ""
-#     # dimension one: Extrovert versus Introvert (E vs I): what energizes you
-#     if B_list[0] > 50:
-#         result += "I"
-#     elif B_list[0] < 50:
-#         result += "E"
-#     else:
-#         result += "X"
-#     # dimension two: Sensation versus iNtuition (S vs N): what you focus on   
-#     if B_list[1] < 50:
-#         result += "S"
-#     elif B_list[1] > 50:
-#         result += "N"
-#     else:
-#         result += "X"
-#     # dimension three: Thinking versus Feeling (T vs F): how you interpret what you focus on
-#     if B_list[2] < 50:
-#         result += "T"
-#     elif B_list[2] > 50:
-#         result += "F"
-#     else:
-#         result += "X"
-#     # dimension four: Judging versus Perceiving (J vs P): how you approach life 
-#     if B_list[3] < 50:
-#         result += "J"
-#     elif B_list[3] > 50:
-#         result += "P"
-#     else:
-#         result += "X"
-      
-#     return result
-
-# # Flask route to process personality test
-# @app.route('/api/personalityTest', methods=['POST'])
-# def process_personality_test():
-#     input_data = request.json
-#     names = input_data['names']
-#     personalityTest = input_data['personalityTest']
-#     results = []
-#     for i in range(len(names)):
-#         A_response = sort_answers(personalityTest[i], 'A')
-#         B_response = sort_answers(personalityTest[i], 'B')
-#         overall_B = percent_of_B(A_response, B_response)
-#         personality = extract_personality(overall_B)
-#         result = {
-#             'name': names[i],
-#             'percentages': overall_B,
-#             'personalityType': personality
-#         }
-#         results.append(result)
-#     return jsonify(results)
-
-# if __name__ == "__main__":
-#     app.run(debug=True)
-
-
 from flask import Flask, jsonify, request
 import json
+import uuid
 from flask_cors import CORS
+import psycopg2
 
 
 app = Flask(__name__)
@@ -98,21 +16,69 @@ def calculate_big_five_scores(answers):
     O = 8 + answers[4] - answers[9] + answers[14] - answers[19] + answers[24] - answers[29] + answers[34] + answers[39] + answers[44] + answers[49]
     return E, A, C, N, O
 
+# Connection to the PostgreSQL database
+conn = psycopg2.connect(
+    host="localhost",
+    database="Wsir",
+    user="postgres",
+    password="123456"
+)
+
 @app.route('/api/calculate_big_five_scores', methods=['POST'])
 def get_big_five_scores():
     input_data = request.json
     answers = input_data['answers']
+    name = input_data['name']
     E, A, C, N, O = calculate_big_five_scores(answers)
+    unique_id = str(uuid.uuid4())
+
+    # Inserting the results into the PostgreSQL database
+    cursor = conn.cursor()
+    cursor.execute(
+        "INSERT INTO results (id, name, extraversion, agreeableness, conscientiousness, neuroticism, openness) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+        (unique_id, name, E, A, C, N, O)
+    )
+    conn.commit()
+    cursor.close()
+
     results = {
-                'extraversion': E,
-                'agreeableness': A,
-                'conscientiousness': C,
-                'neuroticism': N,
-                'openness': O
-        }
+        'extraversion': E,
+        'agreeableness': A,
+        'conscientiousness': C,
+        'neuroticism': N,
+        'openness': O,
+        'id': unique_id,
+        'name': name
+    }
     if None in answers:
         raise ValueError('Invalid input: answers array contains a None value')
     return jsonify(results)
+
+@app.route('/api/personalityResult/<string:id>')
+def get_results(id):
+    cursor = conn.cursor()
+    cursor.execute(
+        "SELECT * FROM results WHERE id=%s",
+        (id,)
+    )
+    result = cursor.fetchone()
+    cursor.close()
+    
+    if result is None:
+        return jsonify({'error': 'Result not found'})
+    
+    results = {
+        'extraversion': result[2],
+        'agreeableness': result[3],
+        'conscientiousness': result[4],
+        'neuroticism': result[5],
+        'openness': result[6],
+        'id': result[0],
+        'name': result[1]
+    }
+    
+    return jsonify(results)
+
 
 @app.route('/api/questions')
 def get_questions():

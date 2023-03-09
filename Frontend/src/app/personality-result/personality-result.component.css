@@ -1,0 +1,26 @@
+.agg{
+    color: #008FFB
+}
+.cons{
+    color:#00E396
+}
+.ext{
+    color:#FEB019
+}
+.neu{
+    color: #FF4560
+}
+.ope{
+    color:#775DD0
+}
+.big5-explaination{
+    width: 80%;
+}
+.big5-explaination-area{
+    justify-content: center;
+    display: flex;
+}
+.big5-text{
+    color:#686868;
+    font-size: 16px;
+}
