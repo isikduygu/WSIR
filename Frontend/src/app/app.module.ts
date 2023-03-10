@@ -12,6 +12,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { PersonalityResultComponent } from './personality-result/personality-result.component'
 import { AppRoutingModule } from './app-routing.module';
+import {MatGridListModule} from '@angular/material/grid-list';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,8 @@ import { AppRoutingModule } from './app-routing.module';
     MatRadioModule,
     MatProgressBarModule,
     NgApexchartsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

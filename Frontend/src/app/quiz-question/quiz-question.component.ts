@@ -74,9 +74,21 @@ export class QuizQuestionComponent implements OnInit {
     this.currentPageNumber = event.pageIndex + 1;
     this.getQuestions();
   }
+  answersSelected: any = {};
 
-  updateProgressBar() {
-    this.progressBarValue +=2;
+  onAnswerSelected(questionId : number) {
+    // console.log(this.answers[questionId])
+    //  const selectedAnswers = Object.values(this.answers[questionId]);
+    // console.log(selectedAnswers)
+    // const numSelected = selectedAnswers.filter((a: any) => a != null).length;
+    // this.progressBarValue = (numSelected / Object.keys(this.answersSelected).length) * 100;
+  }
+  answeredQuestions = [];
+  updateProgressBar(questionId: any) {
+    if (!this.answeredQuestions.includes(questionId as never)){
+      this.answeredQuestions.push(questionId as never);
+    }
+    this.progressBarValue = this.answeredQuestions.length * 2;
   }
   
 }
