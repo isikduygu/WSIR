@@ -1,22 +1,36 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  ChartComponent,
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexXAxis,
-  ApexYAxis,
-  ApexTitleSubtitle,
-} from 'ng-apexcharts';
 import { PersonalityService } from 'src/Services/PersonalityService';
+import {
+  ApexChart,
+  ApexAxisChartSeries,
+  ChartComponent,
+  ApexDataLabels,
+  ApexPlotOptions,
+  ApexLegend,
+  ApexGrid
+} from "ng-apexcharts";
+
+type ApexXAxis = {
+  type?: "category" | "datetime" | "numeric";
+  categories?: any;
+  labels?: {
+    style?: {
+      colors?: string | string[];
+      fontSize?: string;
+    };
+  };
+};
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  plotOptions: ApexPlotOptions;
   xaxis: ApexXAxis;
-  title: ApexTitleSubtitle;
-  colors?: string[];
-  yaxis?: ApexYAxis;
+  grid: ApexGrid;
+  colors: string[];
+  legend: ApexLegend;
 };
 
 @Component({
@@ -39,53 +53,61 @@ export class PersonalityResultComponent implements OnInit {
     private personalityService: PersonalityService,
     private route: ActivatedRoute
   ) {
-   this.chartOptions = {
-    yaxis: {
-      min: 0,
-      max: 40,
-    },
-  series: [
-    {
-      name: 'Results',
-      data: [],
-    },
-  ],
-  chart: {
-    height: 350,
-    type: 'bar',
-  },
-  title: {
-    text: 'Sonuçlar',
-  },
-  xaxis: {
-    categories: [
-      'Agreeableness',
-      'Conscientiousness',
-      'Extraversion',
-      'Neuroticism',
-      'Openness',
-    ],
-    title: {
-      text: 'Kişilik Tipi Sonuçları',
-      style: {
-        fontSize: '24px',
+    this.chartOptions = {
+      series: [
+        {
+          name: 'Results',
+          data: [],
+        }
+      ],
+      chart: {
+        height: 400,
+        type: "bar",
       },
-    },
-    labels: {
-      style: {
-        colors: [
-          "#008FFB",
-          "#00E396",
-          "#FEB019",
-          "#FF4560",
-          "#775DD0",
-        ],
-        fontSize: "16px"
+      colors: [
+        "#008FFB",
+        "#00E396",
+        "#FEB019",
+        "#FF4560",
+        "#775DD0",
+      ],
+      plotOptions: {
+        bar: {
+          columnWidth: "60%",
+          distributed: true
+        }
+      },
+      dataLabels: {
+        enabled: true
+      },
+      legend: {
+        show: true
+      },
+      grid: {
+        show: true
+      },
+      xaxis: {
+        categories: [
+                'Agreeableness',
+                'Conscientiousness',
+                'Extraversion',
+                'Neuroticism',
+                'Openness',
+              ],
+        labels: {
+          style: {
+            colors: [
+              "#008FFB",
+              "#00E396",
+              "#FEB019",
+              "#FF4560",
+              "#775DD0",
+            ],
+            fontSize: "12px"
+          }
+        }
       }
-    },
-  },
-  colors: []
-};
+    };
   }
 
   getResults() {
@@ -110,12 +132,6 @@ export class PersonalityResultComponent implements OnInit {
               ],
             },
           ];
-          this.chartOptions.colors = [ 
-          "#008FFB",
-          "#00E396",
-          "#FEB019",
-          "#FF4560",
-          "#775DD0",]
         });
     });
   }

@@ -1,5 +1,9 @@
-<mat-progress-bar mode="determinate" [value]="progressBarValue" color="accent" height="20"></mat-progress-bar>
-    <label>%{{progressBarValue}}</label>
+<div class="progressBarArea">
+  <mat-progress-bar mode="determinate" [value]="progressBarValue" color="accent" height="20"></mat-progress-bar>
+  <div class="progressBarTextArea">
+    <h2 class="progressBarText">%{{progressBarValue}}</h2>
+  </div>
+</div>
 	<form (submit)="onSubmit()">
 		<div *ngFor="let question of questions">
       <legend>{{question.question}}</legend>

@@ -24,7 +24,7 @@ legend {
 }
 label {
     display: inline;
-    margin: 1em
+    margin: 1em;
 }
 input[type="radio"] {
     margin-right: 0.5em;
@@ -59,4 +59,24 @@ transition: border-color 0.3s ease-in-out;
 }
 input[type="radio"]:checked {
 background-color: pink; /* Set the border color */
+}
+.progressBarArea{
+    margin: 20px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+.progressBarTextArea{
+    background-color: #A59DD1;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin:5px;
+}
+.progressBarText{
+    display: contents;
+    color:white
 }
