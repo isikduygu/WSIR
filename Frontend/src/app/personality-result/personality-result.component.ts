@@ -65,11 +65,11 @@ export class PersonalityResultComponent implements OnInit {
         type: "bar",
       },
       colors: [
-        "#008FFB",
-        "#00E396",
-        "#FEB019",
-        "#FF4560",
-        "#775DD0",
+        "#AFEED1",
+        "#F2D8AC",
+        "#ACDEE0",
+        "#EEC6DA",
+        "#88619A",
       ],
       plotOptions: {
         bar: {
@@ -97,11 +97,11 @@ export class PersonalityResultComponent implements OnInit {
         labels: {
           style: {
             colors: [
-              "#008FFB",
-              "#00E396",
-              "#FEB019",
-              "#FF4560",
-              "#775DD0",
+              "#AFEED1",
+              "#F2D8AC",
+              "#ACDEE0",
+              "#EEC6DA",
+              "#88619A",
             ],
             fontSize: "12px"
           }

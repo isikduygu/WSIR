@@ -1,30 +1,32 @@
-<div class="progressBarArea">
-  <mat-progress-bar mode="determinate" [value]="progressBarValue" color="accent" height="20"></mat-progress-bar>
-  <div class="progressBarTextArea">
-    <h2 class="progressBarText">%{{progressBarValue}}</h2>
+<div>
+  <div class="progressBarArea">
+    <mat-progress-bar mode="determinate" [value]="progressBarValue" color="accent" height="20"></mat-progress-bar>
+    <div class="progressBarTextArea">
+      <h2 class="progressBarText">%{{progressBarValue}}</h2>
+    </div>
   </div>
+    <form (submit)="onSubmit()">
+      <div *ngFor="let question of questions">
+        <legend>{{question.question}}</legend>
+        <mat-grid-list cols="5" rowHeight="100px">
+          <mat-grid-tile><label><input type="radio" [name]="question.id" [(ngModel)]="answers[question.id]" [value]="1" (click)="updateProgressBar(question.id)">Katılmıyorum</label></mat-grid-tile>
+          <mat-grid-tile><label><input type="radio" [name]="question.id" [(ngModel)]="answers[question.id]" [value]="2" (click)="updateProgressBar(question.id)">Kısmen katılmıyorum</label></mat-grid-tile>
+          <mat-grid-tile><label><input type="radio" [name]="question.id" [(ngModel)]="answers[question.id]" [value]="3" (click)="updateProgressBar(question.id)">Kararsızım</label></mat-grid-tile>
+          <mat-grid-tile><label><input type="radio" [name]="question.id" [(ngModel)]="answers[question.id]" [value]="4" (click)="updateProgressBar(question.id)">Kısmen katılıyorum</label></mat-grid-tile>
+          <mat-grid-tile><label><input type="radio" [name]="question.id" [(ngModel)]="answers[question.id]" [value]="5" (click)="updateProgressBar(question.id)">Katılıyorum</label></mat-grid-tile>
+        </mat-grid-list>
+      </div>
+      <div class="submitTestArea"><button *ngIf="currentPageNumber >= lastPageNumber" class="submitTest">Testi Tamamla</button></div>
+      <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+    </form>
+  
+  <mat-paginator #paginator
+                 class="demo-paginator"
+                 (page)="onPageChange($event)"
+                 [length]="length"
+                 [pageSize]="questionsPerPage"
+                 [showFirstLastButtons]="showFirstLastButtons"
+                 [pageIndex]="currentPageNumber - 1"
+                 aria-label="Select page">
+  </mat-paginator>  
 </div>
-	<form (submit)="onSubmit()">
-		<div *ngFor="let question of questions">
-      <legend>{{question.question}}</legend>
-      <mat-grid-list cols="5" rowHeight="100px">
-        <mat-grid-tile><label><input type="radio" [name]="question.id" [(ngModel)]="answers[question.id]" [value]="1" (click)="updateProgressBar(question.id)">Katılmıyorum</label></mat-grid-tile>
-        <mat-grid-tile><label><input type="radio" [name]="question.id" [(ngModel)]="answers[question.id]" [value]="2" (click)="updateProgressBar(question.id)">Kısmen katılmıyorum</label></mat-grid-tile>
-        <mat-grid-tile><label><input type="radio" [name]="question.id" [(ngModel)]="answers[question.id]" [value]="3" (click)="updateProgressBar(question.id)">Kararsızım</label></mat-grid-tile>
-        <mat-grid-tile><label><input type="radio" [name]="question.id" [(ngModel)]="answers[question.id]" [value]="4" (click)="updateProgressBar(question.id)">Kısmen katılıyorum</label></mat-grid-tile>
-        <mat-grid-tile><label><input type="radio" [name]="question.id" [(ngModel)]="answers[question.id]" [value]="5" (click)="updateProgressBar(question.id)">Katılıyorum</label></mat-grid-tile>
-      </mat-grid-list>
-		</div>
-		<div class="submitTestArea"><button *ngIf="currentPageNumber >= lastPageNumber" class="submitTest">Testi Tamamla</button></div>
-		<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
-	</form>
-
-<mat-paginator #paginator
-               class="demo-paginator"
-               (page)="onPageChange($event)"
-               [length]="length"
-               [pageSize]="questionsPerPage"
-               [showFirstLastButtons]="showFirstLastButtons"
-               [pageIndex]="currentPageNumber - 1"
-               aria-label="Select page">
-</mat-paginator>

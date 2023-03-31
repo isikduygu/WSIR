@@ -4,10 +4,21 @@ import uuid
 from flask_cors import CORS
 import psycopg2
 
-
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/api/questions')
+def get_questions():
+    page = request.args.get('page', default=1, type=int)
+    page_size = request.args.get('page_size', default=10, type=int)
+    
+    with open('PersonalType/questions.json',encoding='utf-8') as f:
+        data = json.load(f)
+        start_index = (page - 1) * page_size
+        end_index = start_index + page_size
+        questions = data['questions'][start_index:end_index]
+        return jsonify({'questions': questions})
+    
 def calculate_big_five_scores(answers):
     E = 20 + answers[0] - answers[5] + answers[10] - answers[15] + answers[20] - answers[25] + answers[30] - answers[35] + answers[40] - answers[45]
     A = 14 - answers[1] + answers[6] - answers[11] + answers[16] - answers[21] + answers[26] - answers[31] + answers[36] + answers[41] + answers[46]
@@ -78,19 +89,5 @@ def get_results(id):
     }
     
     return jsonify(results)
-
-
-@app.route('/api/questions')
-def get_questions():
-    page = request.args.get('page', default=1, type=int)
-    page_size = request.args.get('page_size', default=10, type=int)
-    
-    with open('PersonalType/questions.json',encoding='utf-8') as f:
-        data = json.load(f)
-        start_index = (page - 1) * page_size
-        end_index = start_index + page_size
-        questions = data['questions'][start_index:end_index]
-        return jsonify({'questions': questions})
-    
 if __name__ == '__main__':
     app.run()
