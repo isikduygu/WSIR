@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 import json
 import uuid
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 import psycopg2
 
 app = Flask(__name__)
@@ -19,6 +19,13 @@ def get_questions():
         questions = data['questions'][start_index:end_index]
         return jsonify({'questions': questions})
     
+# Connection to the PostgreSQL database
+conn = psycopg2.connect(
+    host="localhost",
+    database="Wsir",
+    user="postgres",
+    password="123456"
+) 
 def calculate_big_five_scores(answers):
     E = 20 + answers[0] - answers[5] + answers[10] - answers[15] + answers[20] - answers[25] + answers[30] - answers[35] + answers[40] - answers[45]
     A = 14 - answers[1] + answers[6] - answers[11] + answers[16] - answers[21] + answers[26] - answers[31] + answers[36] + answers[41] + answers[46]
@@ -27,27 +34,21 @@ def calculate_big_five_scores(answers):
     O = 8 + answers[4] - answers[9] + answers[14] - answers[19] + answers[24] - answers[29] + answers[34] + answers[39] + answers[44] + answers[49]
     return E, A, C, N, O
 
-# Connection to the PostgreSQL database
-conn = psycopg2.connect(
-    host="localhost",
-    database="Wsir",
-    user="postgres",
-    password="123456"
-)
-
 @app.route('/api/calculate_big_five_scores', methods=['POST'])
+@cross_origin(supports_credentials=True)
 def get_big_five_scores():
     input_data = request.json
     answers = input_data['answers']
     name = input_data['name']
+    age = input_data['age']
     E, A, C, N, O = calculate_big_five_scores(answers)
     unique_id = str(uuid.uuid4())
 
     # Inserting the results into the PostgreSQL database
     cursor = conn.cursor()
     cursor.execute(
-        "INSERT INTO results (id, name, extraversion, agreeableness, conscientiousness, neuroticism, openness) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-        (unique_id, name, E, A, C, N, O)
+        "INSERT INTO results (id, name, age, extraversion, agreeableness, conscientiousness, neuroticism, openness) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
+        (unique_id, name, age, E, A, C, N, O)
     )
     conn.commit()
     cursor.close()
@@ -59,7 +60,8 @@ def get_big_five_scores():
         'neuroticism': N,
         'openness': O,
         'id': unique_id,
-        'name': name
+        'name': name,
+        'age': age
     }
     if None in answers:
         raise ValueError('Invalid input: answers array contains a None value')
@@ -79,13 +81,14 @@ def get_results(id):
         return jsonify({'error': 'Result not found'})
     
     results = {
-        'extraversion': result[2],
-        'agreeableness': result[3],
-        'conscientiousness': result[4],
-        'neuroticism': result[5],
-        'openness': result[6],
+        'extraversion': result[3],
+        'agreeableness': result[4],
+        'conscientiousness': result[5],
+        'neuroticism': result[6],
+        'openness': result[2],
         'id': result[0],
-        'name': result[1]
+        'name': result[1],
+        'age' : result[7],
     }
     
     return jsonify(results)

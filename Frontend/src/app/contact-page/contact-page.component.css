@@ -1,0 +1,146 @@
+/*iletişim start*/
+:host {
+  --purple-color: #5f2d6e; 
+  }
+
+.iletişim .iletişim-content .column {
+    width: calc(50% - 30px);
+    padding: 77px;
+  }
+  
+  .iletişim .iletişim-content .iletişimtext {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .iletişim .iletişim-content .left p {
+    text-align: justify;
+  }
+  
+  .iletişim .iletişim-content .left icons {
+    margin: 10px 0;
+  }
+  
+  .iletişim .iletişim-content .row {
+    display: flex;
+    height: 65px;
+    align-items: center;
+  }
+  
+  .iletişim .iletişim-content .row .info {
+    margin-left: 30px;
+  }
+  
+  .iletişim .iletişim-content .row i {
+    font-size: 25px;
+    color: #582b66;
+  }
+  
+  .iletişim .iletişim-content .info .head {
+    font-weight: 777;
+  }
+  
+  .iletişim .iletişim-content .info .sub-title {
+    color: black;
+  }
+  
+  .iletişim .right form .fields {
+    display: flex;
+  }
+  
+  .iletişim .right .text {
+    font-size: larger;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  
+  .iletişim .right form .field,
+  .iletişim .right form .fields .field {
+    height: 45px;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  .iletişim .right form .textarea {
+    height: 80px;
+    width: 100%;
+  }
+  .iletişim .right form .name {
+    margin-right: 10px;
+  }
+  
+  .iletişim .right form .email {
+    margin-left: 10px;
+  }
+  
+  .iletişim .right form .field input,
+  .iletişim .right form .textarea textarea {
+    height: 100%;
+    width: 100%;
+    border: 1px solid lightgrey;
+    border-radius: 6px;
+    outline: none;
+    padding: 0 15px;
+    font-size: 17px;
+  }
+  
+  .iletişim .right form .textarea textarea {
+    padding-top: 10px;
+    resize: none;
+  }
+  
+  .iletişim .right form .button {
+    height: 47px;
+    width: 170px;
+  }
+  
+  .iletişim .right form .button button {
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--purple-color);
+    background: var(--purple-color);
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 37px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .iletişim .right form .button button:hover {
+    color: var(--purple-color);
+    background: none;
+  }
+  
+  .iletişim .iletişim-content .column {
+    width: 50%;
+    margin-bottom: 35px;
+  }
+  .kişiliktiplerititle{
+    text-align: center;
+  }
+  .form-area{
+    width: 50%;
+    margin:20px;
+  }
+  .form-area mat-form-field{
+    display: block;
+  }
+  .form-button{
+    float: right;
+    margin: 20px;
+    height: 40px;  
+    width: 111px;   
+    border: 1px solid var(--purple-color);
+    border-radius: 27px;
+    color: var(--purple-color);
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .form-area textarea{
+    width: 100%;
+    max-height: 100px;
+  }
+  /*iletişim end*/

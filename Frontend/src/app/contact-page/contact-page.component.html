@@ -1,0 +1,87 @@
+ <!--iletişim section start-->
+ <section class="iletişim" id="iletişim">
+    <div class="max-width">
+      <h1 class="kişiliktiplerititle">İLETİŞİM</h1>
+
+      <div class="iletişim-content">
+        <div class="column left">
+          <div class="iletişimtext">Bizimle İletişim kurun</div>
+          <p>
+            Bizimle iletişime geçerek aklınıza takılanları sorun ve kişiliğinize
+            uygun kitapları keşfetmenin sizi çıkaracağı mutlu yolculuğa
+            hazırlanın!
+          </p>
+          <div class="icons">
+            <br />
+            <div class="row">
+              <i class="fa-solid fa-user"></i>
+              <div class="info">
+                <div class="head">İsim</div>
+                <div class="sub-title">
+                  Berkan Bozkurt, Cem Bora Hasgül, Duygu Işık, Meltem Kartoğlu
+                </div>
+              </div>
+            </div>
+
+            <br />
+            <div class="row">
+              <i class="fa-solid fa-location-dot"></i>
+              <div class="info">
+                <div class="head">Adres</div>
+                <div class="sub-title">Beykent Üniversitesi</div>
+              </div>
+            </div>
+
+            <br /><br />
+            <div class="row">
+              <i class="fa-solid fa-envelope"></i>
+              <div class="info">
+                <div class="head">Email</div>
+                <div class="sub-title">
+                  1903013133@student.beykent.edu.tr,
+                  1903013112@student.beykent.edu.tr,
+                  2003013126@student.beykent.edu.tr,
+                  1903013109@student.beykent.edu.tr
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+       <div class="form-area">
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+          <mat-form-field>
+            <input matInput type="text" formControlName="name" placeholder="Name">
+            <mat-error *ngIf="contactForm.controls['name'].invalid && (contactForm.controls['name'].dirty || contactForm.controls['name'].touched)">
+              <span *ngIf="contactForm.controls['name'].errors!['required']">Name is required.</span>
+            </mat-error>
+          </mat-form-field>
+        
+          <mat-form-field>
+            <input matInput type="email" formControlName="email" placeholder="Email">
+            <mat-error *ngIf="contactForm.controls['email'].invalid && (contactForm.controls['email'].dirty || contactForm.controls['email'].touched)">
+              <span *ngIf="contactForm.controls['email'].errors!['required']">Email is required.</span>
+              <span *ngIf="contactForm.controls['email'].errors!['email']">Please enter a valid email.</span>
+            </mat-error>
+          </mat-form-field>
+        
+          <mat-form-field>
+            <input matInput type="text" formControlName="subject" placeholder="Subject">
+            <mat-error *ngIf="contactForm.controls['subject'].invalid && (contactForm.controls['subject'].dirty || contactForm.controls['subject'].touched)">
+              <span *ngIf="contactForm.controls['subject'].errors!['required']">Subject is required.</span>
+            </mat-error>
+          </mat-form-field>
+        
+          <mat-form-field>
+            <textarea matInput formControlName="message" placeholder="Message"></textarea>
+            <mat-error *ngIf="contactForm.controls['message'].invalid && (contactForm.controls['message'].dirty || contactForm.controls['message'].touched)">
+              <span *ngIf="contactForm.controls['message'].errors!['required']">Message is required.</span>
+            </mat-error>
+          </mat-form-field>
+        
+          <button type="submit" class="form-button" >Submit</button>
+        </form>
+       </div>
+      </div>
+    </div>
+  </section>

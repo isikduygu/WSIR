@@ -1,0 +1,173 @@
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+/*! base html codes*/
+.home-component {
+  overflow-x: hidden;
+  scroll-padding-top: 9rem;
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  margin-top: 10%;
+  position: relative;
+  width: 1500px;
+  height: 25rem;
+  right: -77px;
+}
+
+.card {
+  position: relative;
+  width: 350px;
+  height: 250px;
+  justify-content: space-around;
+  background-color: rgba(213, 196, 221, 0.5);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  float: left;
+  margin: 25px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.card-area {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.card .contenttext {
+  position: relative;
+  top: 30px;
+  text-align: center;
+  padding: 10px;
+  font-size: 15px;
+}
+
+.btn {
+  padding: 1rem 3.5rem;
+  border-radius: 30rem;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+  background-color: #88619A;
+  transition: all 0.3s ease;
+  width: 250px;
+  height: 63px;
+}
+
+.btn:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+/*! header start */
+
+.header .logo img {
+  height: 5rem;
+}
+
+.header {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 7%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header .navbar a {
+  margin: 0 1rem;
+  font-size: 1.4rem;
+  color: var(--purple-color);
+  border-bottom: 0.1rem solid transparent;
+}
+
+.header .navbar .active,
+.header .navbar a:hover {
+  border-color: var(--purple-color);
+  padding-bottom: 0.5rem;
+}
+
+/*! header end */
+
+/*! home start */
+.anasayfa {
+  /* background: url()
+   no-repeat; */
+  background-size: cover;
+  background-position: center;
+}
+
+.image {
+  position: relative;
+  height: 200px;
+  width: 200px;
+}
+
+.image .profile-img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.anasayfa .content {
+  max-width: 150rem;
+}
+
+.anasayfa .content {
+  font-size: 96px;
+}
+
+.anasayfa .content {
+  font-weight: bold;
+}
+.bg-shape {
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - 15px),
+      81% 100%,
+      46% calc(100% - 32px),
+      19% 100%,
+      0 calc(100% - 15px)
+    );
+    
+    background: rgba(136, 97, 154, 0.69);    height: calc(100% - 150px);
+    top: -1px;
+    width: 100%;
+    z-index: -99;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+  }
+  .start-test{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+
+  }
+  .start-test-area{
+    display: flex;
+    justify-content: center;
+    margin:20px;
+  }
+  .title-area{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  h4{
+    font-size: 8vw;
+  }
+/*! home end */

@@ -3,8 +3,20 @@ import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PersonalityResult } from 'src/Interfaces/PersonalityResult';
-import { PersonalityService } from 'src/Services/PersonalityService';
-import { QuestionsService } from 'src/Services/QuestionsService';
+import { PersonalityService } from 'src/Services/personality.service';
+import { QuestionsService } from 'src/Services/questions.service';
+import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
+import { FormBuilder } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { InfoBoxComponent } from '../info-box/info-box.component';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-quiz-question',
@@ -14,7 +26,8 @@ import { QuestionsService } from 'src/Services/QuestionsService';
 export class QuizQuestionComponent implements OnInit {
   
   results!: PersonalityResult;
-  name: string = 'Beetty';
+  name: string = '';
+  age: string = '';
   questions!: any[];
   progressBarValue = 0;
 
@@ -32,34 +45,58 @@ export class QuizQuestionComponent implements OnInit {
   lastPageNumber!: number;
   answers: any[] = [];
 
+  list = ['Çocuk 7-12',' Genç 13-17', 'Genç Yetişkin 18-26', 'Yetişkin 27+'];
+  model! : any;
+  selected = true;
+  submitted = false;
+  personalInfoForm! : FormGroup;
+
+
   constructor(
     private readonly personalityService: PersonalityService,
     private questionsService: QuestionsService,
     private spinner: NgxSpinnerService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
     this.getQuestions();
     this.lastPageNumber = Math.ceil(50 / this.questionsPerPage);
+    this.personalInfoForm = new FormGroup({
+      name: new FormControl(" ", [Validators.required]),
+      age: new FormControl(" ", [Validators.required])
+    });
   }
 
   onSubmit() {
+    if(this.progressBarValue == 100){
       this.spinner.show(); // show the spinner
+      console.log(this.answers.filter((answer) => answer !== undefined)); // do something with the selected answers
+
+      // call the service to get the results
+      this.personalityService
+        .sendResults(this.name ,this.age, this.answers.filter((answer) => answer !== undefined))
+        .subscribe((results: PersonalityResult) => {
+          console.log(results);
+          console.log(results.id);
+          console.log(results["id"]);
+          this.router.navigate(['personalityResult', results.id]);
+        });
       setTimeout(() => {
         this.spinner.hide(); // hide the spinner after some time
       }, 2000);
-    console.log(this.answers.filter((answer) => answer !== undefined)); // do something with the selected answers
-
-    // call the service to get the results
-    this.personalityService
-      .sendResults(this.name ,this.answers.filter((answer) => answer !== undefined))
-      .subscribe((results: PersonalityResult) => {
-        console.log(results);
-        console.log(results.id);
-        console.log(results["id"]);
-        this.router.navigate(['personalityResult', results.id]);
-      });
+    }else{
+        const ref: MatDialogRef<InfoBoxComponent> = this.dialog.open(
+          InfoBoxComponent,
+          {
+            data: {
+              message: 'Tüm soruları cevapladığınızdan emin olun.',
+              exit: 'Tamam',
+            },
+          }
+        );
+    }
   }
 
   getQuestions() {
@@ -74,15 +111,7 @@ export class QuizQuestionComponent implements OnInit {
     this.currentPageNumber = event.pageIndex + 1;
     this.getQuestions();
   }
-  answersSelected: any = {};
 
-  onAnswerSelected(questionId : number) {
-    // console.log(this.answers[questionId])
-    //  const selectedAnswers = Object.values(this.answers[questionId]);
-    // console.log(selectedAnswers)
-    // const numSelected = selectedAnswers.filter((a: any) => a != null).length;
-    // this.progressBarValue = (numSelected / Object.keys(this.answersSelected).length) * 100;
-  }
   answeredQuestions = [];
   updateProgressBar(questionId: any) {
     if (!this.answeredQuestions.includes(questionId as never)){
@@ -90,8 +119,13 @@ export class QuizQuestionComponent implements OnInit {
     }
     this.progressBarValue = this.answeredQuestions.length * 2;
   }
-  
+  goToTest(){
+    if (this.personalInfoForm.valid) {
+      this.spinner.show(); // show the spinner
+      this.selected = !this.selected;
+      setTimeout(() => {
+        this.spinner.hide(); // hide the spinner after some time
+      }, 1000);
+    }
 }
-
-
-
+}

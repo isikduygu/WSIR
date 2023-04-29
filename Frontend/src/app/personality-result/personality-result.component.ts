@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PersonalityService } from 'src/Services/PersonalityService';
+import { PersonalityService } from 'src/Services/personality.service';
 import {
   ApexChart,
   ApexAxisChartSeries,
@@ -69,7 +69,7 @@ export class PersonalityResultComponent implements OnInit {
         "#F2D8AC",
         "#ACDEE0",
         "#EEC6DA",
-        "#88619A",
+        "#5f2d6e",
       ],
       plotOptions: {
         bar: {
@@ -101,7 +101,7 @@ export class PersonalityResultComponent implements OnInit {
               "#F2D8AC",
               "#ACDEE0",
               "#EEC6DA",
-              "#88619A",
+              "#5f2d6e",
             ],
             fontSize: "12px"
           }

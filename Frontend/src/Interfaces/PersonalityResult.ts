@@ -5,6 +5,7 @@ export interface PersonalityResult {
   neuroticism: number;
   openness: number;
   name: string;
+  age: string;
   id: string;
   }
       // name: string;

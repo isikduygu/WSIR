@@ -1,17 +1,17 @@
 .agg{
-    color: #008FFB
+    color: #AFEED1
 }
 .cons{
-    color:#00E396
-}
-.ext{
-    color:#FEB019
+    color:#F2D8AC
 }
 .neu{
-    color: #FF4560
+    color: #EEC6DA
+}
+.ext{
+    color: #ACDEE0;
 }
 .ope{
-    color:#775DD0
+    color:#5f2d6e
 }
 .big5-explaination{
     width: 80%;
@@ -21,6 +21,6 @@
     display: flex;
 }
 .big5-text{
-    color:#686868;
+    color: gray;
     font-size: 16px;
 }

@@ -1,0 +1,29 @@
+<div class="confirm-container">
+    <h1 mat-dialog-title>Bilgilendirme</h1>
+    <div class="info_box">
+        <!-- <ul class="info_list">
+           <li class="info">70 sorunun her biri için işaretleme yapın.</li>
+           <li class="info">Sizi en doğru şekilde tanımladığını düşündüğünüz yanıtı seçin</li>
+           <li class="info">Her iki cevaba da katılsanız bile, daha fazla katıldığınızı işaretleyin.</li>
+           <li class="info">Olmak istediğiniz gibi değil, gerçekte olduğunuz gibi cevap veriniz.</li>
+           <li class="info">Bu testte doğru veya yanlış cevap yoktur.</li>
+        </ul> -->
+
+        <ng-container *ngIf="data.info">
+          <ul class="info_list">
+            <li class="info" *ngFor="let info of data.info">{{info}}</li>
+          </ul>
+        </ng-container>
+        <ng-container *ngIf="data.message">
+          <p>{{ data.message }}</p>
+        </ng-container>
+        
+   </div>
+    <div mat-dialog-actions style="float:right;margin:20px;">
+      <button mat-button [mat-dialog-close]="{ clicked: 'Exit' }">{{data.exit}}</button>
+      <button mat-button [mat-dialog-close]="{ clicked: 'Ok' }" (click)="data.function()" style="background-color: #ad92b983">
+        {{data.confirm}}
+      </button>
+    </div>
+  </div>
+  

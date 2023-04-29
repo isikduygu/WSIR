@@ -1,0 +1,124 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
+
+:host {
+  --purple-color: #5f2d6e; ;
+  }
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.container {
+  margin-top: 10%;
+  position: relative;
+  width: 1500px;
+  height: 25rem;
+  right: -77px;
+}
+
+section {
+  padding: 100px 0;
+}
+
+.btn {
+  margin-top: -500rem;
+  display: inline-block;
+  padding: 1rem 3.5rem;
+  border: 2px solid var(--purple-color);
+  border-radius: 30rem;
+  font-size: 1.5rem;
+  color: #fff;
+  background-color: var(--purple-color);
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  color: var(--purple-color);
+  background: none;
+}
+
+/*! header start */
+
+.logo{
+  object-fit: cover;
+  margin: 5px;
+}
+.logo img{
+  width: 150px;
+}
+
+.header {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 7%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header .navbar a {
+  margin: 0 1rem;
+  font-size: 1.4rem;
+  color: var(--purple-color);
+  border-bottom: 0.1rem solid transparent;
+}
+
+.header .navbar .active,
+.header .navbar a:hover {
+  border-color: var(--purple-color);
+  padding-bottom: 0.5rem;
+}
+a{
+  cursor: pointer;
+}
+
+/*! header end */
+
+/* menu mobile start */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v140/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+.mobile-menu{
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .mobile-menu{
+    display: block;
+  }
+  nav{
+    display: none;
+  }
+  
+}
+/* menu mobile end */

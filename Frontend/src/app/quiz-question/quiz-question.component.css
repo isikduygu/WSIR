@@ -44,7 +44,13 @@ input[type="radio"] {
     display: flex;
 }
 button:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.next-page button, .previous-page button {
     background-color: #8c85b1;
+}
+.icon{
+    color:white
 }
 input[type="radio"] {
 -webkit-appearance: none; /* Remove the default appearance */
@@ -80,3 +86,53 @@ background-color: pink; /* Set the border color */
     display: contents;
     color:white
 }
+.kisiliktest{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    position: relative;
+}
+.top{
+    height: 75px;
+    color: #fff;
+    background-color: #AD92B9;
+    border-radius: 20px 20px 0px 0px;
+    text-align: center;
+}
+.quiz-question-area{
+    display: flex;
+    justify-content: center;
+    min-width: 400px;
+    margin: 50px;
+}
+.quiz-question{
+    width: 80%;
+}
+.form-field{
+    margin:50px
+}
+.form{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.next-page{
+    position: absolute;
+    right: 65px;
+    bottom: 74px;
+}
+.previous-page {
+    position: absolute;
+    left: 65px;
+    bottom: 74px;
+}
+.next-page i, .previous-page i{
+    cursor: pointer;
+}
+@media only screen and (max-width: 768px) {
+    .form{
+        display: block;
+    }
+    .form-field{
+        width: 70%;
+    }
+    
+  }

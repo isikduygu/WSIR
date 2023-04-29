@@ -13,10 +13,27 @@ import { NgApexchartsModule } from "ng-apexcharts";
 import { PersonalityResultComponent } from './personality-result/personality-result.component'
 import { AppRoutingModule } from './app-routing.module';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { HomeComponent } from './home/home.component';
+import { PersonalityTypePageComponent } from './personality-type-page/personality-type-page.component';
+import { ContactPageComponent } from './contact-page/contact-page.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { InfoBoxComponent } from './info-box/info-box.component';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatSelectModule} from '@angular/material/select';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+
 @NgModule({
   declarations: [
     AppComponent,
     QuizQuestionComponent,
+    HomeComponent,
+    PersonalityTypePageComponent,
+    ContactPageComponent,
+    InfoBoxComponent,
     PersonalityResultComponent
   ],
   imports: [
@@ -30,7 +47,15 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatProgressBarModule,
     NgApexchartsModule,
     AppRoutingModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
+    MatTabsModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

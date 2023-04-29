@@ -5,6 +5,42 @@
 	<title>Quiz Template</title>
 </head>
 <body>
+	<div>
+		<!--! header section start  -->
+		<header class="header">
+		  <a routerLink="/" class="logo">
+			<img src="../assets/Images/logoo.png" alt="logo" />
+		  </a>
+		  <nav class="navbar">
+			<a (click)="routeToPage('anasayfa')">Anasayfa</a>
+			<a (click)="routeToPage('KişilikTipleri')">Kişilik Tipleri</a>
+			<a (click)="confirmDialog()">Test</a>
+			<a (click)="routeToPage('İletişim')">İletişim</a> 
+		</nav>
+		<!-- header menu section start -->
+		<div class="mobile-menu">
+			<button mat-icon-button [matMenuTriggerFor]="menu">
+				<mat-icon>more_vert</mat-icon>
+			  </button>
+			  <mat-menu #menu="matMenu">
+				<button mat-menu-item>
+				  <span (click)="routeToPage('anasayfa')">Anasayfa</span>
+				</button>
+				<button mat-menu-item>
+				  <span (click)="routeToPage('KişilikTipleri')">Kişilik Tipleri</span>
+				</button>
+				<button mat-menu-item>
+				  <span (click)="confirmDialog()">Test</span>
+				</button>
+				<button mat-menu-item>
+				  <span (click)="routeToPage('İletişim')">İletişim</span>
+				</button>
+			  </mat-menu>
+		</div>
+		  <!-- header menu section end -->
+		</header>
+		<!--! header section end  -->
 	<router-outlet></router-outlet>
+	</div>
 </body>
 </html>
