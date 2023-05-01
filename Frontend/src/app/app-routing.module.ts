@@ -5,13 +5,17 @@ import { QuizQuestionComponent } from './quiz-question/quiz-question.component';
 import { HomeComponent } from './home/home.component';
 import { PersonalityTypePageComponent } from './personality-type-page/personality-type-page.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
+import { PendingChangesGuard } from 'src/Interfaces/component-can-deactivate';
+import { NotFoundComponent } from './not-found/not-found.component';
+
 
 const routes: Routes = [
   { path: 'personalityResult/:id', component: PersonalityResultComponent },
-  { path: 'test', component: QuizQuestionComponent },
+  { path: 'test', component: QuizQuestionComponent , canDeactivate: [PendingChangesGuard]},
   { path: '', component: HomeComponent },
   { path: 'KişilikTipleri', component: PersonalityTypePageComponent },
   { path: 'İletişim', component: ContactPageComponent },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({

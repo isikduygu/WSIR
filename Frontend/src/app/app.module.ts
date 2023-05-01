@@ -25,6 +25,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatSelectModule} from '@angular/material/select';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
+import { PendingChangesGuard } from 'src/Interfaces/component-can-deactivate';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import {MatInputModule} from '@angular/material/input';
     PersonalityTypePageComponent,
     ContactPageComponent,
     InfoBoxComponent,
-    PersonalityResultComponent
+    PersonalityResultComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,7 @@ import {MatInputModule} from '@angular/material/input';
     ReactiveFormsModule,
     MatInputModule,
   ],
-  providers: [],
+  providers: [PendingChangesGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

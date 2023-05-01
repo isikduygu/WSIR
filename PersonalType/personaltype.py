@@ -61,7 +61,7 @@ def get_big_five_scores():
         'openness': O,
         'id': unique_id,
         'name': name,
-        'age': age
+        'age': age,
     }
     if None in answers:
         raise ValueError('Invalid input: answers array contains a None value')
@@ -69,6 +69,7 @@ def get_big_five_scores():
 
 @app.route('/api/personalityResult/<string:id>')
 def get_results(id):
+    id = str(uuid.uuid4())
     cursor = conn.cursor()
     cursor.execute(
         "SELECT * FROM results WHERE id=%s",
@@ -76,21 +77,48 @@ def get_results(id):
     )
     result = cursor.fetchone()
     cursor.close()
-    
+
     if result is None:
-        return jsonify({'error': 'Result not found'})
+        return jsonify({'error': 'Result not found'}), 404
+
+    personality_type = [
+    {
+        "type": 'Uyumluluk',
+        "description": "Bir bireyin şefkat, empati ve başkaları için endişe düzeyini ifade eder. Bu boyutta yüksek puan alan kişiler işbirlikçi, yardımsever ve arkadaş canlısı olma eğilimindedir. Uyumlu ilişkilere değer verirler ve genellikle sıcak ve besleyici olarak tanımlanırlar.",
+        'score': result[4]
+    },
+    {
+        "type": 'Sorumluluk',
+        "description": "Bireyin organizasyon, sorumluluk ve güvenilirlik düzeyini ifade eder. Bu boyutta yüksek puan alan kişiler çalışkan, güvenilir ve verimli olma eğilimindedir. Genellikle hedef odaklıdırlar ve hedeflerine ulaşmak için çabalarlar.",
+        'score': result[5]
+    },
+    {
+        "type": 'Dışa Dönüklük',
+        "description": "Bireyin sosyallik, atılganlık ve duygusal dışavurumculuk düzeyini ifade eder. Bu boyutta yüksek puan alan kişiler tipik olarak dışa dönük, enerjik ve konuşkandır. Başkalarının yanında olmaktan keyif alma eğilimindedirler ve genellikle sosyal kelebekler olarak tanımlanırlar.",
+        'score':  result[3]
+    },
+    {
+        "type": 'Nörorizm',
+        "description": "Bireyin duygusal dengesizlik, kaygı ve karamsarlık düzeyini ifade eder. Bu boyutta yüksek puan alan insanlar endişe, stres ve kendinden şüphe duymaya eğilimlidirler. Genellikle hassas ve duygusal olarak tanımlanırlar.",
+        'score': result[6]
+    },
+    {
+        "type": 'Açıklık',
+        "description": "Bireyin yeni deneyimlere ve fikirlere açıklığını ifade eder. Bu boyutta yüksek puan alan kişiler genellikle yaratıcı, yaratıcı ve meraklıdır. Yeni şeyler keşfetmeye açıktırlar ve genellikle çok çeşitli ilgi alanlarına sahip olarak tanımlanırlar.",
+        'score': result[2]
+    }
+]
+
+    # sort the personality_type list based on the score in descending order
+    personality_type = sorted(personality_type, key=lambda x: x['score'], reverse=True)
     
     results = {
-        'extraversion': result[3],
-        'agreeableness': result[4],
-        'conscientiousness': result[5],
-        'neuroticism': result[6],
-        'openness': result[2],
         'id': result[0],
         'name': result[1],
         'age' : result[7],
+        'personalityType': personality_type
     }
-    
+
     return jsonify(results)
 if __name__ == '__main__':
     app.run()

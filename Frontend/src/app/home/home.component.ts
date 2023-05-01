@@ -20,9 +20,8 @@ export class HomeComponent implements OnInit {
       {
         data: {
           info: [
-            '70 sorunun her biri için işaretleme yapın.',
+            '50 sorunun her biri için işaretleme yapın.',
             'Sizi en doğru şekilde tanımladığını düşündüğünüz yanıtı seçin',
-            'Her iki cevaba da katılsanız bile, daha fazla katıldığınızı işaretleyin.',
             'Olmak istediğiniz gibi değil, gerçekte olduğunuz gibi cevap veriniz.',
             'Bu testte doğru veya yanlış cevap yoktur.'
           ],

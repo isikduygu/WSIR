@@ -51,35 +51,35 @@
        <div class="form-area">
         <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
           <mat-form-field>
-            <input matInput type="text" formControlName="name" placeholder="Name">
+            <input matInput type="text" formControlName="name" placeholder="Ad">
             <mat-error *ngIf="contactForm.controls['name'].invalid && (contactForm.controls['name'].dirty || contactForm.controls['name'].touched)">
-              <span *ngIf="contactForm.controls['name'].errors!['required']">Name is required.</span>
+              <span *ngIf="contactForm.controls['name'].errors!['required']">Zorunlu alan.</span>
             </mat-error>
           </mat-form-field>
         
           <mat-form-field>
             <input matInput type="email" formControlName="email" placeholder="Email">
             <mat-error *ngIf="contactForm.controls['email'].invalid && (contactForm.controls['email'].dirty || contactForm.controls['email'].touched)">
-              <span *ngIf="contactForm.controls['email'].errors!['required']">Email is required.</span>
-              <span *ngIf="contactForm.controls['email'].errors!['email']">Please enter a valid email.</span>
+              <span *ngIf="contactForm.controls['email'].errors!['required']">Zorunlu alan.</span>
+              <span *ngIf="contactForm.controls['email'].errors!['email']">Lütfen email formatında giriniz.</span>
             </mat-error>
           </mat-form-field>
         
           <mat-form-field>
-            <input matInput type="text" formControlName="subject" placeholder="Subject">
+            <input matInput type="text" formControlName="subject" placeholder="Konu">
             <mat-error *ngIf="contactForm.controls['subject'].invalid && (contactForm.controls['subject'].dirty || contactForm.controls['subject'].touched)">
-              <span *ngIf="contactForm.controls['subject'].errors!['required']">Subject is required.</span>
+              <span *ngIf="contactForm.controls['subject'].errors!['required']">Zorunlu alan.</span>
             </mat-error>
           </mat-form-field>
         
           <mat-form-field>
-            <textarea matInput formControlName="message" placeholder="Message"></textarea>
+            <textarea matInput formControlName="message" placeholder="Mesaj"></textarea>
             <mat-error *ngIf="contactForm.controls['message'].invalid && (contactForm.controls['message'].dirty || contactForm.controls['message'].touched)">
-              <span *ngIf="contactForm.controls['message'].errors!['required']">Message is required.</span>
+              <span *ngIf="contactForm.controls['message'].errors!['required']">Zorunlu alan.</span>
             </mat-error>
           </mat-form-field>
         
-          <button type="submit" class="form-button" >Submit</button>
+          <button type="submit" class="form-button" >Gönder</button>
         </form>
        </div>
       </div>

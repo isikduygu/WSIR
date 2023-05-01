@@ -1,6 +1,6 @@
 <div class="quiz-question-area">
  <div class="quiz-question">
-  <div class="top">
+  <div class="top" [ngClass]="{'title': selected}">
     <h1 *ngIf="selected">KİŞİSEL BİLGİLER</h1>
       <div class="progressBarArea" *ngIf="!selected">
       <mat-progress-bar
@@ -48,7 +48,7 @@
       <form (submit)="onSubmit()">
         <div *ngFor="let question of questions">
           <legend>{{ question.question }}</legend>
-          <mat-grid-list cols="5" rowHeight="100px">
+          <mat-grid-list [cols]="isSmallScreen ? 3 : 5" rowHeight="100px">
             <mat-grid-tile
               ><label
                 ><input

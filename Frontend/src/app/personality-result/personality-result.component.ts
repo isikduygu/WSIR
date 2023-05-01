@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PersonalityService } from 'src/Services/personality.service';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 import {
   ApexChart,
   ApexAxisChartSeries,
@@ -44,6 +46,14 @@ export class PersonalityResultComponent implements OnInit {
 
   id!: any;
   results: any;
+  categories = [];
+  score = [];
+  colors = [        
+  "#AFEED1",
+  "#F2D8AC",
+  "#ACDEE0",
+  "#EEC6DA",
+  "#5f2d6e",]
 
   ngOnInit(): void {
     this.getResults();
@@ -51,7 +61,8 @@ export class PersonalityResultComponent implements OnInit {
 
   constructor(
     private personalityService: PersonalityService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.chartOptions = {
       series: [
@@ -64,13 +75,7 @@ export class PersonalityResultComponent implements OnInit {
         height: 400,
         type: "bar",
       },
-      colors: [
-        "#AFEED1",
-        "#F2D8AC",
-        "#ACDEE0",
-        "#EEC6DA",
-        "#5f2d6e",
-      ],
+      colors: this.colors,
       plotOptions: {
         bar: {
           columnWidth: "60%",
@@ -87,22 +92,10 @@ export class PersonalityResultComponent implements OnInit {
         show: true
       },
       xaxis: {
-        categories: [
-                'Agreeableness',
-                'Conscientiousness',
-                'Extraversion',
-                'Neuroticism',
-                'Openness',
-              ],
+        categories: this.categories,
         labels: {
           style: {
-            colors: [
-              "#AFEED1",
-              "#F2D8AC",
-              "#ACDEE0",
-              "#EEC6DA",
-              "#5f2d6e",
-            ],
+            colors: this.colors,
             fontSize: "12px"
           }
         }
@@ -115,21 +108,28 @@ export class PersonalityResultComponent implements OnInit {
       this.id = params.get('id');
       this.personalityService
         .getPersonalityResult(this.id)
-        .subscribe((results) => {
+        .pipe(
+          catchError(error => {
+            if (error.status === 404) {
+              this.router.navigate(['**'])
+            } else {
+              // Handle other errors here
+            }
+            return throwError(error);
+          })
+        ).subscribe((results) => {
           this.results = results;
           console.log(this.results);
+          results.personalityType.forEach((element: never) => {
+           this.categories.push(element['type'])
+           this.score.push(element['score'] )
+          });
 
           // Assign the series data dynamically based on the results
           this.chartOptions.series = [
             {
               name: 'Results',
-              data: [
-                this.results.agreeableness,
-                this.results.conscientiousness,
-                this.results.extraversion,
-                this.results.neuroticism,
-                this.results.openness,
-              ],
+              data: this.score,
             },
           ];
         });

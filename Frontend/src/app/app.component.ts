@@ -18,28 +18,20 @@ export class AppComponent {
   ) {}
 
   routeToPage(page: any) {
-    if (this.router.url == '/test') {
-      this.exitDialog();
-    } else {
       if (page == 'anasayfa') {
         this.router.navigate(['/']);
       } else {
         this.router.navigate(['/', page]);
       }
-    }
   }
   confirmDialog() {
-    if (this.router.url == '/test') {
-      this.exitDialog();
-    }else{
       const ref: MatDialogRef<InfoBoxComponent> = this.dialog.open(
         InfoBoxComponent,
         {
           data: {
             info: [
-              '70 sorunun her biri için işaretleme yapın.',
+              '50 sorunun her biri için işaretleme yapın.',
               'Sizi en doğru şekilde tanımladığını düşündüğünüz yanıtı seçin',
-              'Her iki cevaba da katılsanız bile, daha fazla katıldığınızı işaretleyin.',
               'Olmak istediğiniz gibi değil, gerçekte olduğunuz gibi cevap veriniz.',
               'Bu testte doğru veya yanlış cevap yoktur.'
             ],
@@ -49,7 +41,6 @@ export class AppComponent {
           },
         }
       );
-    }
   }
   routeToTest(){
     this.spinner.show(); // show the spinner
@@ -59,20 +50,20 @@ export class AppComponent {
     this.router.navigate(['/test'])
   }
 
-  exitDialog() {
-    const ref: MatDialogRef<InfoBoxComponent> = this.dialog.open(
-      InfoBoxComponent,
-      {
-        data: {
-          message: 'Testi iptal etmek istediğinize emin misiniz?',
-          exit: 'Teste Devam Et',
-          confirm: 'İptal et',
-          function: this.refreshPage.bind(this)
-        },
-      }
-    );
-  }
-  refreshPage() {
-    this.router.navigate(['/'])
-  }
+  // exitDialog() {
+  //   const ref: MatDialogRef<InfoBoxComponent> = this.dialog.open(
+  //     InfoBoxComponent,
+  //     {
+  //       data: {
+  //         message: 'Testi iptal etmek istediğinize emin misiniz?',
+  //         exit: 'Teste Devam Et',
+  //         confirm: 'İptal et',
+  //         function: this.refreshPage.bind(this)
+  //       },
+  //     }
+  //   );
+  // }
+  // refreshPage() {
+  //   this.router.navigate(['/'])
+  // }
 }

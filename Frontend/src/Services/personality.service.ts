@@ -21,14 +21,10 @@ export class PersonalityService {
         map((result: any) => {
           // Create a PersonalityResult object manually
           const personalityResult: PersonalityResult = {
-            extraversion: result.extraversion,
-            agreeableness: result.agreeableness,
-            conscientiousness: result.conscientiousness,
-            neuroticism: result.neuroticism,
-            openness: result.openness,
             name: result.name,
             age: result.age,
-            id: result.id
+            id: result.id,
+            personalityType : result.personalityType
           };
           return personalityResult;
         })

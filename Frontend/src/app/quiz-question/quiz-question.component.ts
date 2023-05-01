@@ -7,9 +7,12 @@ import { PersonalityService } from 'src/Services/personality.service';
 import { QuestionsService } from 'src/Services/questions.service';
 import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
-import { FormBuilder } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { InfoBoxComponent } from '../info-box/info-box.component';
+import { HostListener } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ComponentCanDeactivate } from 'src/Interfaces/component-can-deactivate';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -23,7 +26,15 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './quiz-question.component.html',
   styleUrls: ['./quiz-question.component.css']
 })
-export class QuizQuestionComponent implements OnInit {
+export class QuizQuestionComponent implements OnInit , ComponentCanDeactivate {
+
+   // @HostListener allows us to also guard against browser refresh, close, etc.
+   @HostListener('window:beforeunload')
+   canDeactivate(): Observable<boolean> | any {
+     // insert logic to check if there are pending changes here;
+     // returning true will navigate without confirmation
+     // returning false will show a confirm dialog before navigating away
+   }
   
   results!: PersonalityResult;
   name: string = '';
@@ -50,6 +61,7 @@ export class QuizQuestionComponent implements OnInit {
   selected = true;
   submitted = false;
   personalInfoForm! : FormGroup;
+  isSmallScreen!: boolean;
 
 
   constructor(
@@ -57,7 +69,8 @@ export class QuizQuestionComponent implements OnInit {
     private questionsService: QuestionsService,
     private spinner: NgxSpinnerService,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private breakpointObserver: BreakpointObserver
   ) {}
 
   ngOnInit() {
@@ -66,6 +79,9 @@ export class QuizQuestionComponent implements OnInit {
     this.personalInfoForm = new FormGroup({
       name: new FormControl(" ", [Validators.required]),
       age: new FormControl(" ", [Validators.required])
+    });
+    this.breakpointObserver.observe(['(max-width: 768px)']).subscribe(result => {
+      this.isSmallScreen = result.matches;
     });
   }
 
