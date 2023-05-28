@@ -582,3 +582,126 @@ section{
     margin-bottom: 35px;
 }
 /*iletişim end*/
+
+/*kitap önerileri start*/
+.kitaplar .kbaslik{
+    max-width: 150rem;
+    font-size: 30px;
+    font-weight: bold;
+    margin-right: -60px;
+}
+
+.containerr{
+    margin-top: 10%; 
+    position:relative;
+    width: 1500px; 
+    height:40rem; 
+    right: -67px;  
+    
+}
+
+
+.kutu{
+    position: relative;
+    width: 380px; 
+    height:470px;  
+    justify-content:space-around;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 3px 6px 8px 4px rgba(0,0,0,0.3); 
+    float: left;
+    margin:0 15px; 
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.kutu .contenttextt{
+    position: relative;
+    top: 30px;
+    text-align: center;
+    padding: 10px;
+    font-size: 15px;
+}
+
+.kitaplar .kicon{
+    margin-right: 100px;
+    margin-top: -70px;
+    margin-left: 35px;
+    
+}
+/*kitap önerileri end*/
+
+/*kitap önizleme start*/
+
+.kitap .kbaslikk{
+    max-width: 150rem;
+    font-size: 30px;
+    font-weight: bold;
+    margin-right: -60px;
+}
+
+.containerrr{
+    margin-top: 10%; 
+    position:relative;
+    width: 1500px; 
+    height:40rem; 
+    right: -67px;  
+    
+}
+
+.kutuu{
+    position: relative;
+    width: 1190px; 
+    height:500px;  
+    background-color: rgb(255, 255, 255);
+    box-shadow: 3px 6px 8px 4px rgba(0,0,0,0.3); 
+    float: left;
+    margin:0 15px; 
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.kitap .containerrr .kutuu .div1{
+    /*background-color: goldenrod;*/
+    width: 40%;
+    float:left;
+}
+
+.kitap .containerrr .kutuu .div2{
+   /* background-color: lightcoral;*/
+    width: 60%;
+    float:right;
+   
+}
+
+
+.kitap .containerrr .kutuu .div1 .bkimage{
+    border: 15px solid white;
+}
+
+.kitap .containerrr .kutuu .div2 p{
+    text-align: justify;
+}
+
+.kitap .containerrr .kutuu .div2 .buttonlar button{  
+    margin: 0 50px;  
+    height: 60px;  
+    width: 150px;  
+    margin-top: 35px;
+    border: 1px solid var(--purple-color);
+    border-radius: 17px;
+    color: black;
+    background-color: #957e9b;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.kitap .kiconk{
+    margin-right: 100px;
+    margin-top: -70px;
+    margin-left: 35px;
+    
+}
+
+/*kitap önizleme end*/
