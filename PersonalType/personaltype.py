@@ -69,7 +69,11 @@ def get_big_five_scores():
 
 @app.route('/api/personalityResult/<string:id>')
 def get_results(id):
-    id = str(uuid.uuid4())
+    # id = str(uuid.uuid4())
+    try:
+        uuid_obj = uuid.UUID(id)
+    except ValueError:
+        return jsonify({'error': 'Invalid ID format'}), 404
     cursor = conn.cursor()
     cursor.execute(
         "SELECT * FROM results WHERE id=%s",
@@ -80,7 +84,7 @@ def get_results(id):
 
     if result is None:
         return jsonify({'error': 'Result not found'}), 404
-
+    
     personality_type = [
     {
         "type": 'Uyumluluk',
@@ -98,7 +102,7 @@ def get_results(id):
         'score':  result[3]
     },
     {
-        "type": 'Nörorizm',
+        "type": 'Nörotizm',
         "description": "Bireyin duygusal dengesizlik, kaygı ve karamsarlık düzeyini ifade eder. Bu boyutta yüksek puan alan insanlar endişe, stres ve kendinden şüphe duymaya eğilimlidirler. Genellikle hassas ve duygusal olarak tanımlanırlar.",
         'score': result[6]
     },
@@ -108,7 +112,6 @@ def get_results(id):
         'score': result[2]
     }
 ]
-
     # sort the personality_type list based on the score in descending order
     personality_type = sorted(personality_type, key=lambda x: x['score'], reverse=True)
     
