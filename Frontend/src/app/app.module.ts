@@ -27,6 +27,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import { PendingChangesGuard } from 'src/Interfaces/component-can-deactivate';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { RecommendedBookComponent } from './recommended-book/recommended-book.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ContactPageComponent,
     InfoBoxComponent,
     PersonalityResultComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    RecommendedBookComponent
   ],
   imports: [
     BrowserModule,

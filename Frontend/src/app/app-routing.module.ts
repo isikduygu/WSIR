@@ -7,6 +7,7 @@ import { PersonalityTypePageComponent } from './personality-type-page/personalit
 import { ContactPageComponent } from './contact-page/contact-page.component';
 import { PendingChangesGuard } from 'src/Interfaces/component-can-deactivate';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { RecommendedBookComponent } from './recommended-book/recommended-book.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'KişilikTipleri', component: PersonalityTypePageComponent },
   { path: 'İletişim', component: ContactPageComponent },
+  { path: 'KitapÖnerisi/:id', component: RecommendedBookComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

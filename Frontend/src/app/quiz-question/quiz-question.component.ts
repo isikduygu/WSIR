@@ -116,12 +116,18 @@ export class QuizQuestionComponent implements OnInit , ComponentCanDeactivate {
   }
 
   getQuestions() {
+    this.spinner.show(); // show the spinner
+  
     this.questionsService
       .getQuestions(this.currentPageNumber, this.questionsPerPage)
       .subscribe((data) => {
         this.questions = data;
+  
+        // Hide the spinner inside the subscribe callback
+        this.spinner.hide();
       });
   }
+  
 
   onPageChange(event: PageEvent) {
     this.currentPageNumber = event.pageIndex + 1;
@@ -137,11 +143,7 @@ export class QuizQuestionComponent implements OnInit , ComponentCanDeactivate {
   }
   goToTest(){
     if (this.personalInfoForm.valid) {
-      this.spinner.show(); // show the spinner
       this.selected = !this.selected;
-      setTimeout(() => {
-        this.spinner.hide(); // hide the spinner after some time
-      }, 1000);
     }
 }
 }

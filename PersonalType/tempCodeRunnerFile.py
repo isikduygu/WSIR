@@ -1,1 +1,0 @@
-SELECT * FROM results WHERE id=%s

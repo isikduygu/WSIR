@@ -10,8 +10,10 @@ import {
   ApexDataLabels,
   ApexPlotOptions,
   ApexLegend,
-  ApexGrid
+  ApexGrid,
+  NgApexchartsModule
 } from "ng-apexcharts";
+import { NgxSpinnerService } from 'ngx-spinner';
 
 type ApexXAxis = {
   type?: "category" | "datetime" | "numeric";
@@ -62,7 +64,8 @@ export class PersonalityResultComponent implements OnInit {
   constructor(
     private personalityService: PersonalityService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) {
     this.chartOptions = {
       series: [
@@ -134,5 +137,12 @@ export class PersonalityResultComponent implements OnInit {
           ];
         });
     });
+  }
+  routerPage(){
+    this.spinner.show(); // show the spinner
+    setTimeout(() => {
+      this.spinner.hide(); // hide the spinner after some time
+    }, 2000);
+    this.router.navigate(['KitapÖnerisi', this.id]);
   }
 }

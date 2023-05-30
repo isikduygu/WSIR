@@ -1,0 +1,57 @@
+:host {
+    --purple-color: #5f2d6e;
+    --main-color: #e6dcf3;
+}
+.sugg-book-title{
+    color: var(--purple-color);
+}
+.sugg-book-title-area{
+    text-align: center;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.box{
+    cursor: pointer;
+    box-shadow: rgba(173, 46, 185, 0.5) 0px 2px 8px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    margin:20px
+}
+.box-text{
+    text-align: center;
+}
+.bookimg{
+    height: 350px;
+}
+.ricon{
+    float: right;
+    cursor: pointer;
+}
+.licon{
+    float: left;
+    cursor: pointer;
+}
+.book-container{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-top: 10px solid #AD92B9;
+    border-radius: 5px;
+    margin: 50px;
+    padding: 20px;
+}
+.book-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.div2{
+    margin: 20px
+}
+span{
+    font-weight: bold;
+}

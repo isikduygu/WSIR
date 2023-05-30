@@ -3,6 +3,7 @@ import json
 import uuid
 from flask_cors import CORS, cross_origin
 import psycopg2
+import categories as ct
 
 app = Flask(__name__)
 CORS(app)
@@ -12,7 +13,7 @@ def get_questions():
     page = request.args.get('page', default=1, type=int)
     page_size = request.args.get('page_size', default=10, type=int)
     
-    with open('PersonalType/questions.json',encoding='utf-8') as f:
+    with open('questions.json',encoding='utf-8') as f:
         data = json.load(f)
         start_index = (page - 1) * page_size
         end_index = start_index + page_size
@@ -123,5 +124,29 @@ def get_results(id):
     }
 
     return jsonify(results)
+
+@app.route('/api/bookRecommendation/<string:id>')
+def get_book(id):
+    cursor = conn.cursor()
+    cursor.execute(
+        "SELECT * FROM results WHERE id=%s",
+        (id,)
+    )
+    results = cursor.fetchone()
+    cursor.close()
+
+    if results is None:
+        return jsonify({'error': 'Result not found'}), 404
+    
+    extraversion= results[2]
+    agreeableness = results[3]
+    conscientiousness = results[4]
+    neuroticism = results[5]
+    openness = results[6]
+
+    book_description = ct.calculate_category([neuroticism,extraversion,openness,agreeableness,conscientiousness])
+
+    return jsonify(book_description)
+
 if __name__ == '__main__':
     app.run()

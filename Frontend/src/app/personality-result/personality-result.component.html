@@ -10,6 +10,10 @@
     [grid]="chartOptions.grid"
   ></apx-chart>
 </div>
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+<div class=ricon (click)="routerPage()"> 
+  <i class="fa-solid fa-circle-chevron-right fa-2xl"></i>
+</div> 
 <div class="big5-explaination-area" *ngFor="let type of results?.personalityType; let i = index">
   <div class="big5-explaination">
     <h1 class="big5-title" [ngStyle]="{'color': colors[i]}">{{type.type}}</h1>

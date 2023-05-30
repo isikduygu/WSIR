@@ -9,3 +9,7 @@
     color: gray;
     font-size: 16px;
 }
+.ricon{
+    float: right;
+    cursor: pointer;
+}
