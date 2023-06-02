@@ -42,14 +42,15 @@ def get_big_five_scores():
     answers = input_data['answers']
     name = input_data['name']
     age = input_data['age']
+    rate = input_data['rate']
     E, A, C, N, O = calculate_big_five_scores(answers)
     unique_id = str(uuid.uuid4())
 
     # Inserting the results into the PostgreSQL database
     cursor = conn.cursor()
     cursor.execute(
-        "INSERT INTO results (id, name, age, extraversion, agreeableness, conscientiousness, neuroticism, openness) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
-        (unique_id, name, age, E, A, C, N, O)
+        "INSERT INTO results (id, name, age, rate, extraversion, agreeableness, conscientiousness, neuroticism, openness) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
+        (unique_id, name, age,rate, E, A, C, N, O)
     )
     conn.commit()
     cursor.close()
@@ -63,6 +64,7 @@ def get_big_five_scores():
         'id': unique_id,
         'name': name,
         'age': age,
+        'rate': rate,
     }
     if None in answers:
         raise ValueError('Invalid input: answers array contains a None value')
@@ -143,8 +145,9 @@ def get_book(id):
     conscientiousness = results[4]
     neuroticism = results[5]
     openness = results[6]
+    rate = results[8]
 
-    book_description = ct.calculate_category([neuroticism,extraversion,openness,agreeableness,conscientiousness])
+    book_description = ct.calculate_categories([neuroticism,extraversion,openness,agreeableness,conscientiousness],rate)
 
     return jsonify(book_description)
 

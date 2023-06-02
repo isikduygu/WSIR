@@ -40,6 +40,7 @@ export class QuizQuestionComponent implements OnInit , ComponentCanDeactivate {
   name: string = '';
   age: string = '';
   questions!: any[];
+  rate: string = '';
   progressBarValue = 0;
 
   length = 50;
@@ -62,7 +63,18 @@ export class QuizQuestionComponent implements OnInit , ComponentCanDeactivate {
   submitted = false;
   personalInfoForm! : FormGroup;
   isSmallScreen!: boolean;
-
+  rate_list: { key: string, value: string }[] = [
+    { key: '0.0-0.5', value: 'A' },
+    { key: '0-5.1.0', value: 'B' },
+    { key: '1.0-1.5', value: 'C' },
+    { key: '1.5-2.0', value: 'D' },
+    { key: '2.0-2.5', value: 'E' },
+    { key: '2.5-3.0', value: 'F' },
+    { key: '3.0-3.5', value: 'G' },
+    { key: '3.5-4.0', value: 'H' },
+    { key: '4.0-4.5', value: 'I' },
+    { key: '5.0', value: 'J' }
+  ];
 
   constructor(
     private readonly personalityService: PersonalityService,
@@ -78,7 +90,8 @@ export class QuizQuestionComponent implements OnInit , ComponentCanDeactivate {
     this.lastPageNumber = Math.ceil(50 / this.questionsPerPage);
     this.personalInfoForm = new FormGroup({
       name: new FormControl(" ", [Validators.required]),
-      age: new FormControl(" ", [Validators.required])
+      age: new FormControl(" ", [Validators.required]),
+      rate: new FormControl(" ", [Validators.required])
     });
     this.breakpointObserver.observe(['(max-width: 768px)']).subscribe(result => {
       this.isSmallScreen = result.matches;
@@ -92,7 +105,7 @@ export class QuizQuestionComponent implements OnInit , ComponentCanDeactivate {
 
       // call the service to get the results
       this.personalityService
-        .sendResults(this.name ,this.age, this.answers.filter((answer) => answer !== undefined))
+        .sendResults(this.name ,this.age, this.rate, this.answers.filter((answer) => answer !== undefined))
         .subscribe((results: PersonalityResult) => {
           console.log(results);
           console.log(results.id);
@@ -145,5 +158,4 @@ export class QuizQuestionComponent implements OnInit , ComponentCanDeactivate {
     if (this.personalInfoForm.valid) {
       this.selected = !this.selected;
     }
-}
-}
+}}

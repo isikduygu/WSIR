@@ -37,6 +37,19 @@
             <strong>Zorunlu</strong> alan
           </mat-error>
         </mat-form-field>
+
+        <mat-form-field class="form-field" appearance="fill">
+          <mat-label>Kitap Rate seçiniz</mat-label>
+          <mat-select formControlName="rate" [(ngModel)]="rate">
+            <mat-option *ngFor="let rate of rate_list" [value]="rate.value">
+              {{ rate.key }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="personalInfoForm.controls['rate'].errors?.['required']">
+            <strong>Zorunlu</strong> alan
+          </mat-error>
+        </mat-form-field>
+        
         <div class="next-page"> <button mat-icon-button type="submit">
           <mat-icon class="icon" (click)="goToTest()">arrow_forward_ios</mat-icon>
         </button>

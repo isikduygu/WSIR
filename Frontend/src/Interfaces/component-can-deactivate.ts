@@ -24,6 +24,7 @@ export class PendingChangesGuard {
         );
         return ref.afterClosed();
       }
+
       
       canDeactivate(component: ComponentCanDeactivate): Observable<boolean> | boolean {
         // if there are no pending changes, just allow deactivation; else confirm first

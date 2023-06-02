@@ -12,7 +12,7 @@ import { RecommendedBookComponent } from './recommended-book/recommended-book.co
 
 const routes: Routes = [
   { path: 'personalityResult/:id', component: PersonalityResultComponent },
-  { path: 'test', component: QuizQuestionComponent , canDeactivate: [PendingChangesGuard]},
+  { path: 'test', component: QuizQuestionComponent}, //canDeactivate: [PendingChangesGuard]
   { path: '', component: HomeComponent },
   { path: 'KişilikTipleri', component: PersonalityTypePageComponent },
   { path: 'İletişim', component: ContactPageComponent },
