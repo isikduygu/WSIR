@@ -1,7 +1,7 @@
 from googleapiclient.discovery import build
 
 # API anahtarınızı buraya ekleyin
-def searchBook(kitap_adi):
+def searchBook(kitap_adi,yazar_adi):
     api_key = "AIzaSyDtEC-3zuGWe7LerbKM-cUP1lRenx9p3Nc"
 
     # API istemcisini oluşturun
@@ -12,8 +12,8 @@ def searchBook(kitap_adi):
     # yazar_adi = "Dostoyoveski"
 
     # Kitap araması API isteği
-    # request = service.volumes().list(q=f'intitle:{kitap_adi}+inauthor:{yazar_adi}')
-    request = service.volumes().list(q=f'intitle:{kitap_adi}')
+    request = service.volumes().list(q=f'intitle:{kitap_adi}+inauthor:{yazar_adi}')
+    # request = service.volumes().list(q=f'intitle:{kitap_adi}')
     response = request.execute()
 
     if 'items' in response:

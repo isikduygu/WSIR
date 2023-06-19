@@ -15,7 +15,7 @@ export class RecommendedBookComponent implements OnInit {
     private spinner: NgxSpinnerService,
   ) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.getBookResults()
   }
 
@@ -27,7 +27,7 @@ export class RecommendedBookComponent implements OnInit {
     this.selected = !this.selected;
   }
 
-  getBookResults() {
+ getBookResults() {
     this.spinner.show(); // show the spinner
     this.route.paramMap.subscribe((params) => {
       this.id = params.get('id');
@@ -42,5 +42,6 @@ export class RecommendedBookComponent implements OnInit {
         });
     });
   }
+  
   
 }

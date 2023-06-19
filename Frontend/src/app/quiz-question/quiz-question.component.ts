@@ -57,7 +57,7 @@ export class QuizQuestionComponent implements OnInit , ComponentCanDeactivate {
   lastPageNumber!: number;
   answers: any[] = [];
 
-  list = ['Çocuk 7-12',' Genç 13-17', 'Genç Yetişkin 18-26', 'Yetişkin 27+'];
+  list = ['Çocuk 7-12',' Genç 13-17', 'Yetişkin 18+'];
   model! : any;
   selected = true;
   submitted = false;

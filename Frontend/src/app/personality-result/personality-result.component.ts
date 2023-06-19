@@ -138,11 +138,7 @@ export class PersonalityResultComponent implements OnInit {
         });
     });
   }
-  routerPage(){
-    this.spinner.show(); // show the spinner
-    setTimeout(() => {
-      this.spinner.hide(); // hide the spinner after some time
-    }, 2000);
+  routerPage() {
     this.router.navigate(['KitapÖnerisi', this.id]);
-  }
+}
 }

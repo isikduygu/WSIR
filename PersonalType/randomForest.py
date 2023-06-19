@@ -13,15 +13,19 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics.pairwise import cosine_distances
 import bookAPİ as api
 
-def randomForest(temp,rate):
-    # Veri setini yükle
-    df = pd.read_csv('books_with_categories.csv')
 
-    data = df.head(5000)
+def randomForest(temp,rate,age):
+    # Veri setini yükle
+    if(age ==  'Yetişkin 18+'):
+        df = pd.read_csv('books_with_categories.csv')
+    else:
+        df = pd.read_csv('filtrelenmis_dataset.csv')
+
+    data = df.head(2000)
     data.head()
 
     # Gerekli sütunları seç
-    features = ['categorie1','categorie2','categorie3','new_rating']
+    features = ['categorie1','categorie2','categorie3','new_rating','author']
 
     target = 'title'  # Öneri yapılacak kitabın başlığı
 
@@ -50,8 +54,14 @@ def randomForest(temp,rate):
     # Tahmin yapmak için örnek bir kitap verisi oluştur
     #kitap = pd.DataFrame({'categorie1': ['categorie1_drama']})
 
-    kitap = pd.DataFrame({'categorie1': temp[0], 'categorie2': temp[1],'categorie3': temp[2], 'new_rating': [rate]})
+    temp = [item.lower() for item in temp]
+
+    if(age ==  'Çocuk 7-12'):
+        kitap = pd.DataFrame({'categorie1': ['childrens'], 'categorie2': ['kids'],'categorie3': [temp[0]], 'new_rating': [rate]})
+    else:
+        kitap = pd.DataFrame({'categorie1': [temp[0]], 'categorie2': [temp[1]],'categorie3': [temp[2]], 'new_rating': [rate]})
     #  kitap = pd.DataFrame({'categorie1': ['classics'], 'categorie2': ['fantasy'],'categorie3': ['fiction'], 'new_rating': ['C']})
+
 
     # Veriyi sayısal forma dönüştürme
     kitap_encoded = pd.get_dummies(kitap)
@@ -61,14 +71,32 @@ def randomForest(temp,rate):
 
     # Modeli kullanarak tahmin yapma
     tahmin = model.predict(kitap_encoded)
+    # author = data.loc[data['title'] == tahmin[0], 'author'].iloc[0]
 
-    book_desc = api.searchBook(tahmin[0])
+    author_prediction = df[df['title'] == tahmin[0]]['author'].values[0]
+
+
+    book_desc = api.searchBook(tahmin[0],author_prediction)
 
     # Tahmin sonucunu ekrana yazdır
-    if book_desc is None:
-        return randomForest(temp,rate)
+    if book_desc is None or book_desc['imageUrl'] == 'Resim bulunamadı':
+        return randomForest(temp,rate,age)
     else:
         return book_desc
 
+# from book_recommendation import BookRecommendation
+# import bookAPİ as api
 
-# print(randomForest(['Activism', 'Money management', 'Soldiers'], 'E'))
+# def randomForest(temp,rate):
+#     recommendation = BookRecommendation()
+#     recommendation.load_model('model.pkl')
+#     prediction = recommendation.predict_book(temp, rate)
+
+#     book_desc = api.searchBook(prediction)
+
+#     # Tahmin sonucunu ekrana yazdır
+#     if book_desc is None or book_desc['imageUrl'] == 'Resim bulunamadı':
+#         return randomForest(temp,rate)
+#     else:
+#         return book_desc
+    

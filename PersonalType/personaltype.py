@@ -145,9 +145,10 @@ def get_book(id):
     conscientiousness = results[4]
     neuroticism = results[5]
     openness = results[6]
+    age = results[7]
     rate = results[8]
 
-    book_description = ct.calculate_categories([neuroticism,extraversion,openness,agreeableness,conscientiousness],rate)
+    book_description = ct.calculate_categories([neuroticism,extraversion,openness,agreeableness,conscientiousness],rate,age)
 
     return jsonify(book_description)
 

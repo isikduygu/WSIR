@@ -9,10 +9,9 @@
      <div class="box" (click)="changePage()"> 
        <div class="box-text">
          <h1>{{results.book_title}}</h1> <br>
-         <img class="bookimg" [src]="results.imageUrl" alt="Book one" />
+         <img class="bookimg" [src]="results.imageUrl" />
        </div>
      </div>
-     <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
    
      <!-- <div class="box">
        <div class="box-text"> 
@@ -61,4 +60,5 @@
  </div>
  
  </section>
+ <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
   <!--kitap önizleme section end-->
